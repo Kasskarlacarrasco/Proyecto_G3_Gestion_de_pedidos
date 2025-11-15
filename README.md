@@ -1,129 +1,154 @@
-📦 Gestión de Pedidos — FASTAPI + REACT + MYSQL
+📦 Proyecto G3 – Gestión de Pedidos
 
-Proyecto completo para la gestión de pedidos, importación desde Excel, procesamiento, validación de stock, dashboard básico, y panel web en React.
+Sistema completo para la carga masiva de pedidos desde Excel, validación de stock, actualización de estados y visualización desde una interfaz web.
 
 Incluye:
 
-🟦 Backend — FastAPI + SQLAlchemy + MySQL
+✔ Backend en FastAPI + SQLAlchemy + MySQL/MariaDB
 
-🟩 Frontend — React + Vite (TypeScript)
+✔ Frontend en React + TypeScript
 
-🗄 Base de datos — MySQL/MariaDB
+✔ Procesamiento de archivos Excel
 
-📊 Importación de Excel para:
+✔ Gestión de pedidos, stock y distritos
 
-Pedidos
+✔ UI moderna con tema oscuro
 
-Stock
+🚀 Requisitos previos
 
-Distritos
+Asegúrate de tener instalado:
 
-🚀 Instalación y Ejecución
-1️⃣ Clonar el repositorio
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
+✔ Python 3.10+
+✔ Node.js 18+ y npm
+✔ MySQL o MariaDB
+✔ Git
+📥 1. Clonar el proyecto
+git clone https://github.com/Kasskarlacarrasco/Proyecto_G3_Gestion_de_pedidos.git
+cd Proyecto_G3_Gestion_de_pedidos
 
-🛠 Backend (FastAPI)
-2️⃣ Entrar a la carpeta backend
+🐍 2. Instalar y correr el Backend
+📁 Navegar al directorio del backend:
 cd backend
 
-3️⃣ Crear entorno virtual
-
-Windows:
-
+🧪 Crear entorno virtual:
 python -m venv venv
+
+🔧 Activar entorno virtual:
+
+Windows PowerShell / Git Bash
+
+source venv/Scripts/activate
+
+
+CMD
+
 venv\Scripts\activate
 
 
-Mac/Linux:
+Linux / Mac
 
-python3 -m venv venv
 source venv/bin/activate
 
-4️⃣ Instalar dependencias
+📦 Instalar dependencias:
 pip install -r requirements.txt
 
+⚙ 2.1 Configurar variables de entorno
 
-Si no lo tienes, genera el archivo requirements:
+Crear un archivo:
 
-pip freeze > requirements.txt
+📄 backend/.env
 
-5️⃣ Configurar base de datos MySQL
-
-Crear una BD llamada:
-
-gestion_pedidos
-
-
-O el nombre que quieras, pero debe coincidir con tu cadena de conexión.
-
-6️⃣ Configurar variables de entorno
-
-Crear archivo:
-
-backend/.env
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=tu_usuario
+DB_PASSWORD=tu_password
+DB_NAME=gestion_pedidos
 
 
-Contenido:
+Asegúrate de que la base de datos exista:
 
-MYSQL_USER=root
-MYSQL_PASSWORD=TU_PASSWORD
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DB=gestion_pedidos
+CREATE DATABASE gestion_pedidos;
 
+Crear tablas de SQLAlchemy (solo la primera vez)
+python create_tables.py
 
-⚠️ Cambiar los valores según tu entorno.
-
-7️⃣ Ejecutar migración automática de tablas
-
-FastAPI + SQLAlchemy ya crea las tablas al iniciar (si está activado en tu código):
-
+▶ 2.2 Iniciar servidor Backend
 uvicorn main:app --reload
 
 
 Backend disponible en:
-
 👉 http://127.0.0.1:8000
 
-👉 Documentación automática: http://127.0.0.1:8000/docs
+Documentación automática:
+👉 http://127.0.0.1:8000/docs
 
-🎨 Frontend (React + Vite)
-8️⃣ Abrir carpeta frontend
+🌐 3. Instalar y correr el Frontend
+📁 Navegar:
+cd ../frontend
 
-Desde la raíz del proyecto:
-
-cd frontend
-
-9️⃣ Instalar dependencias
+📦 Instalar dependencias:
 npm install
 
-🔟 Levantar el servidor de desarrollo
+▶ Iniciar servidor de desarrollo:
 npm run dev
 
 
-Tu frontend estará en:
+Frontend disponible en:
+👉 http://localhost:5173
 
-👉 http://localhost:5173/
-
-📁 Estructura del proyecto
-gestion-pedidos/
+📁 4. Estructura del proyecto
+Proyecto_G3_Gestion_de_pedidos/
 │
 ├── backend/
 │   ├── app/
 │   │   ├── api/
-│   │   ├── database/
 │   │   ├── models/
 │   │   ├── schemas/
 │   │   └── services/
-│   ├── venv/
+│   ├── database.py
+│   ├── create_tables.py
 │   ├── main.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── .env
 │
 ├── frontend/
 │   ├── src/
-│   ├── public/
+│   │   ├── api/
+│   │   ├── pages/
+│   │   └── components/
 │   ├── package.json
-│   └── vite.config.ts
+│   └── vite.config.js
 │
 └── README.md
+
+🔧 5. Comandos Git recomendados
+Subir cambios:
+git add .
+git commit -m "Descripción del cambio"
+git push origin main
+
+📤 6. Cómo usar la aplicación
+1️⃣ En el frontend → Página “Importar Pedidos”
+
+Selecciona un archivo Excel
+
+Presiona Subir Excel
+
+Se muestra la lista actualizada de pedidos
+
+Colores indican estado (confirmado, sin stock, pendiente, etc.)
+
+2️⃣ Backend procesa automáticamente:
+
+Inserta pedidos
+
+Limpia datos nulos
+
+Valida estructura del archivo
+
+🧩 7. Endpoints principales
+Método	Ruta	Descripción
+POST	/pedidos/importar-excel	Subir Excel de pedidos
+GET	/pedidos	Listar pedidos
+POST	/stock/importar-excel	Subir stock
+POST	/distritos/importar-excel	Subir distritos
