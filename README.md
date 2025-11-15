@@ -52,25 +52,6 @@ source venv/bin/activate
 📦 Instalar dependencias:
 pip install -r requirements.txt
 
-⚙ 2.1 Configurar variables de entorno
-
-Crear un archivo:
-
-📄 backend/.env
-
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=tu_usuario
-DB_PASSWORD=tu_password
-DB_NAME=gestion_pedidos
-
-
-Asegúrate de que la base de datos exista:
-
-CREATE DATABASE gestion_pedidos;
-
-Crear tablas de SQLAlchemy (solo la primera vez)
-python create_tables.py
 
 ▶ 2.2 Iniciar servidor Backend
 uvicorn main:app --reload
